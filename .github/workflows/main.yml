@@ -1,0 +1,51 @@
+name: VeriServe CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: veriserve
+          POSTGRES_PASSWORD: veriserve_dev
+          POSTGRES_DB: veriserve
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint with ruff
+        run: ruff check .
+
+      - name: Run tests with coverage
+        env:
+          DATABASE_URL: postgresql://veriserve:veriserve_dev@localhost:5432/veriserve
+        run: |
+          coverage run -m pytest tests/ -v
+          coverage report --fail-under=81.2

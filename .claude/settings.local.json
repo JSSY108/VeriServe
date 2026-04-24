@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker compose up *)",
+      "Bash(docker compose ps *)",
+      "Bash(curl *)",
+      "Bash(docker compose *)",
+      "WebFetch(domain:docs.ilmu.ai)",
+      "WebSearch",
+      "Bash(python -m pytest tests/ -v --cov=app --cov-report=term-missing)",
+      "Bash(python *)"
+    ]
+  }
+}
