@@ -1,29 +1,24 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import '../models/claim.dart';
+import '../models/merchant_policy.dart';
 
-class ApiService {
-  static const String baseUrl = 'http://localhost:8000';
+/// Abstract service layer for VeriServe API calls.
+/// Swap [MockApiService] for [LiveApiService] to connect to the FastAPI backend.
+abstract class ApiService {
+  /// Submit a new claim and receive the processing result.
+  Future<Claim> submitClaim(Claim claim);
 
-  static Future<Map<String, dynamic>> orchestrate({
-    required int orderId,
-    required String customerClaim,
-    required String customerImageUrl,
-  }) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/orchestrate'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'order_id': orderId,
-        'customer_claim': customerClaim,
-        'customer_image_url': customerImageUrl,
-      }),
-    );
-    return jsonDecode(response.body) as Map<String, dynamic>;
-  }
+  /// Get all claims, optionally filtered by merchant.
+  Future<List<Claim>> getClaims({String? merchantFilter});
 
-  static Future<List<Map<String, dynamic>>> fetchAuditLogs() async {
-    final response = await http.get(Uri.parse('$baseUrl/api/audit-logs'));
-    final List body = jsonDecode(response.body);
-    return body.cast<Map<String, dynamic>>();
-  }
+  /// Get the full audit trace for a specific claim.
+  Future<AuditTrace> getAuditTrace(String claimId);
+
+  /// Get all merchant policies.
+  Future<List<MerchantPolicy>> getMerchantPolicies();
+
+  /// Get a specific merchant policy.
+  Future<MerchantPolicy> getMerchantPolicy(String merchantId);
+
+  /// Update a merchant policy.
+  Future<MerchantPolicy> updateMerchantPolicy(MerchantPolicy policy);
 }

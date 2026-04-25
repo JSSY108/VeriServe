@@ -4,7 +4,8 @@ from app.schemas.schemas import (
     RefundRequest,
     VisionVerifyResponse,
     RefundResponse,
-    GLMDecision,
+    TraceEntry,
+    MultiAgentDecision,
     OrchestrateResponse,
 )
 
@@ -14,6 +15,7 @@ __all__ = [
     "RefundRequest",
     "VisionVerifyResponse",
     "RefundResponse",
-    "GLMDecision",
+    "TraceEntry",
+    "MultiAgentDecision",
     "OrchestrateResponse",
 ]

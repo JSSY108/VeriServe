@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Global Operational Overview - VeriServe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#44474d",
+                        "tertiary-container": "#161c22",
+                        "on-primary-container": "#76849f",
+                        "primary": "#000000",
+                        "surface-tint": "#515f78",
+                        "surface": "#fbf9fb",
+                        "surface-variant": "#e4e2e4",
+                        "primary-container": "#0d1c32",
+                        "surface-container": "#efedef",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#394857",
+                        "surface-bright": "#fbf9fb",
+                        "secondary-fixed-dim": "#b8c8da",
+                        "on-surface": "#1b1b1d",
+                        "on-background": "#1b1b1d",
+                        "background": "#fbf9fb",
+                        "tertiary-fixed": "#dde3eb",
+                        "outline-variant": "#c5c6cd",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#dbd9db",
+                        "on-secondary-fixed": "#0d1d2a",
+                        "inverse-surface": "#303032",
+                        "secondary": "#50606f",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "secondary-fixed": "#d4e4f6",
+                        "outline": "#75777e",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#39475f",
+                        "on-primary-fixed": "#0d1c32",
+                        "on-tertiary-container": "#7e848c",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "surface-container-low": "#f5f3f5",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#556474",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "secondary-container": "#d1e1f4",
+                        "inverse-primary": "#b9c7e4",
+                        "inverse-on-surface": "#f2f0f2",
+                        "surface-container-high": "#eae7ea",
+                        "error": "#ba1a1a",
+                        "deep-navy": "#0A192F",
+                        "slate-gray": "#94A3B8",
+                        "success-green": "#10B981",
+                        "alert-orange": "#F59E0B"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "20px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "base-unit": "4px",
+                        "margin-page": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "mono-log": ["Inter"],
+                        "body-base": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "mono-log": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-base h-screen flex overflow-hidden" data-mode="connect">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col pt-20 pb-4 z-30 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 font-inter text-sm font-medium uppercase tracking-wider docked left-0 h-full w-64 border-r border-r border-slate-200 dark:border-slate-800 flat no shadows hidden md:flex">
+<div class="px-6 mb-8 flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-lg" style="">
+                VS
+            </div>
+<div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tighter normal-case" style="">VeriServe Ops</h2>
+<p class="text-xs text-on-surface-variant font-normal normal-case" style="">Verified Environment</p>
+</div>
+</div>
+<div class="px-6 mb-6">
+<button class="w-full bg-deep-navy text-white font-semibold py-3 px-4 rounded-lg flex items-center transition-all hover:bg-opacity-90 shadow-sm" style="background-color: #0A192F;">
+<span class="material-symbols-outlined text-2xl mr-4" style="">add</span>
+<span class="text-left text-sm leading-tight" style="">
+    Operational<br/>Overview
+</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col space-y-1 px-4">
+<!-- Active Tab -->
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-800 border-r-2 border-slate-900 dark:border-slate-50 transition-all duration-200 ease-in-out group" href="#" style="">
+<span class="material-symbols-outlined mr-3" style="">policy</span>
+<span class="" style="">Investigations</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out group" href="#" style="">
+<span class="material-symbols-outlined mr-3 group-hover:text-slate-900 dark:group-hover:text-slate-200" style="">hub</span>
+<span class="" style="">Merchants</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out group" href="#" style="">
+<span class="material-symbols-outlined mr-3 group-hover:text-slate-900 dark:group-hover:text-slate-200" style="">receipt_long</span>
+<span class="" style="">Audit Logs</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col space-y-1 px-4 border-t border-outline-variant pt-4">
+<a class="flex items-center px-4 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out group" href="#" style="">
+<span class="material-symbols-outlined mr-3 text-sm" style="">contact_support</span>
+<span class="text-xs" style="">Support</span>
+</a>
+<a class="flex items-center px-4 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out group" href="#" style="">
+<span class="material-symbols-outlined mr-3 text-sm" style="">settings</span>
+<span class="text-xs" style="">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-6 w-full bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 font-inter tracking-tight font-medium docked full-width top-0 border-b z-40 border-slate-200 dark:border-slate-800 flat no shadows absolute">
+<div class="flex items-center md:hidden">
+<button class="text-on-surface hover:text-primary transition-colors mr-4" style="">
+<span class="material-symbols-outlined" style="">menu</span>
+</button>
+<h1 class="text-lg font-black text-slate-900 dark:text-white tracking-tighter" style="">VeriServe</h1>
+</div>
+<div class="hidden md:flex items-center flex-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface ml-4" style="">Global Operational Overview</h1>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline text-sm" style="">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-surface-container text-on-surface rounded-full border border-outline-variant focus:border-deep-navy focus:ring-1 focus:ring-deep-navy text-sm w-64 transition-all" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center space-x-2">
+<button class="p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors scale-100 active:scale-[0.98] duration-150 relative text-slate-500 dark:text-slate-400" style="">
+<span class="material-symbols-outlined" style="">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border border-white"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors scale-100 active:scale-[0.98] duration-150 text-slate-500 dark:text-slate-400" style="">
+<span class="material-symbols-outlined" style="">help_outline</span>
+</button>
+<button class="p-1 rounded-full hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors scale-100 active:scale-[0.98] duration-150 text-slate-500 dark:text-slate-400" style="">
+<span class="material-symbols-outlined text-3xl" style="">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto pt-24 px-6 md:px-margin-page pb-12 bg-background">
+<div class="max-w-7xl mx-auto space-y-xl">
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- KPI Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-tertiary-fixed p-6 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" style="">Total Verified</div>
+<div class="p-2 bg-primary-fixed rounded-lg text-on-primary-fixed">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>verified</span>
+</div>
+</div>
+<div class="font-display-xl text-display-xl text-on-surface" style="">1,240</div>
+<div class="mt-2 text-sm text-success-green flex items-center font-medium">
+<span class="material-symbols-outlined text-sm mr-1" style="">trending_up</span>
+<span class="" style="">+12% this week</span>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-tertiary-fixed p-6 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" style="">Fraud Prevented</div>
+<div class="p-2 bg-error-container rounded-lg text-on-error-container">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>shield</span>
+</div>
+</div>
+<div class="font-display-xl text-display-xl text-on-surface" style="">RM 15,200</div>
+<div class="mt-2 text-sm text-on-surface-variant flex items-center">
+<span class="" style="">Across 48 blocked transactions</span>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-tertiary-fixed p-6 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider" style="">Auto-Resolution Rate</div>
+<div class="p-2 bg-secondary-fixed rounded-lg text-on-secondary-fixed">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>auto_awesome</span>
+</div>
+</div>
+<div class="flex items-baseline space-x-2">
+<div class="font-display-xl text-display-xl text-on-surface" style="">92%</div>
+</div>
+<!-- Confidence Gauge -->
+<div class="mt-4 w-full bg-surface-variant rounded-full h-1.5 overflow-hidden">
+<div class="bg-success-green h-1.5 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+<!-- Live Investigations Module -->
+<div class="bg-surface-container-lowest border border-tertiary-fixed rounded-xl overflow-hidden shadow-[0_4px_12px_rgba(10,25,47,0.05)]">
+<div class="px-6 py-5 border-b border-tertiary-fixed flex justify-between items-center bg-surface-bright">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center" style="">
+<span class="material-symbols-outlined mr-2 text-on-surface-variant" style="">radar</span>
+                            Live Investigations
+                        </h2>
+<button class="text-sm font-medium text-secondary hover:text-primary transition-colors flex items-center" style="">
+                            View All <span class="material-symbols-outlined text-sm ml-1" style="">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-tertiary-fixed font-label-caps text-label-caps text-on-surface-variant">
+<th class="px-6 py-4 font-semibold" style="">Merchant</th>
+<th class="px-6 py-4 font-semibold" style="">Order ID</th>
+<th class="px-6 py-4 font-semibold" style="">Category</th>
+<th class="px-6 py-4 font-semibold" style="">Risk Level</th>
+<th class="px-6 py-4 font-semibold" style="">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-tertiary-fixed">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4" style="">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded bg-orange-50 text-orange-500 flex items-center justify-center mr-3 border border-orange-100">
+<span class="material-symbols-outlined text-lg" style="">shopping_bag</span>
+</div>
+<span class="font-medium" style="">Shopee</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono-log text-mono-log text-on-surface-variant" style="">#SHP-992</td>
+<td class="px-6 py-4 text-on-surface-variant" style="">Electronics</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-success-green mr-2"></div>
+<span class="" style="">Low</span>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-success-green border border-green-200" style="">
+                                            AI-Verified
+                                        </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4" style="">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded bg-green-50 text-green-600 flex items-center justify-center mr-3 border border-green-100">
+<span class="material-symbols-outlined text-lg" style="">restaurant</span>
+</div>
+<span class="font-medium" style="">GrabFood</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono-log text-mono-log text-on-surface-variant" style="">#GF-994</td>
+<td class="px-6 py-4 text-on-surface-variant" style="">Perishables</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-yellow-400 mr-2"></div>
+<span class="" style="">Medium</span>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container-highest text-on-surface-variant border border-outline-variant" style="">
+<span class="material-symbols-outlined text-[12px] mr-1" style="">pending</span>
+                                            Pending Review
+                                        </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-red-50/30">
+<td class="px-6 py-4" style="">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded bg-zinc-900 text-white flex items-center justify-center mr-3 border border-zinc-800">
+<span class="material-symbols-outlined text-lg" style="">watch</span>
+</div>
+<span class="font-medium" style="">Zalora</span>
+</div>
+</td>
+<td class="px-6 py-4 font-mono-log text-mono-log text-on-surface-variant" style="">#ZAL-883</td>
+<td class="px-6 py-4 text-on-surface-variant" style="">Apparel</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center font-medium text-error">
+<div class="w-2 h-2 rounded-full bg-alert-orange mr-2 animate-pulse"></div>
+<span class="" style="">High</span>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-error border border-red-200" style="">
+<span class="material-symbols-outlined text-[12px] mr-1" style="">warning</span>
+                                            Fraud Alert
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<button class="fixed bottom-8 right-8 z-50 flex items-center space-x-2 bg-deep-navy/80 hover:bg-deep-navy text-white px-5 py-3 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 group" style="">
+<span class="material-symbols-outlined" style="">person</span>
+<span class="font-medium" style="">Switch to User Mode</span>
+</button></div>
+</body></html>

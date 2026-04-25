@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Audit Logs - VeriServe</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#76849f",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b9c7e4",
+                        "surface-bright": "#fbf9fb",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3f5",
+                        "outline-variant": "#c5c6cd",
+                        "primary-fixed": "#d6e3ff",
+                        "on-surface-variant": "#44474d",
+                        "surface-tint": "#515f78",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "on-tertiary-fixed": "#161c22",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "outline": "#75777e",
+                        "on-secondary-container": "#556474",
+                        "inverse-on-surface": "#f2f0f2",
+                        "on-primary-fixed-variant": "#39475f",
+                        "tertiary": "#000000",
+                        "surface-dim": "#dbd9db",
+                        "on-surface": "#1b1b1d",
+                        "tertiary-fixed": "#dde3eb",
+                        "surface-container-high": "#eae7ea",
+                        "secondary-fixed": "#d4e4f6",
+                        "on-primary-fixed": "#0d1c32",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#394857",
+                        "surface-container": "#efedef",
+                        "primary": "#000000",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "primary-container": "#0d1c32",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#d1e1f4",
+                        "error-container": "#ffdad6",
+                        "surface": "#fbf9fb",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#0d1d2a",
+                        "secondary-fixed-dim": "#b8c8da",
+                        "secondary": "#50606f",
+                        "on-tertiary-container": "#7e848c",
+                        "on-background": "#1b1b1d",
+                        "inverse-surface": "#303032",
+                        "surface-variant": "#e4e2e4",
+                        "tertiary-container": "#161c22",
+                        
+                        // Adding semantic colors for status as requested by prompt
+                        "status-success-bg": "rgba(34, 197, 94, 0.1)",
+                        "status-success-text": "#166534",
+                        "status-flagged-bg": "rgba(249, 115, 22, 0.1)",
+                        "status-flagged-text": "#9a3412",
+                        "status-error-bg": "rgba(239, 68, 68, 0.1)",
+                        "status-error-text": "#991b1b",
+                        
+                        "tech-navy": "#0A192F"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-page": "40px",
+                        "lg": "24px",
+                        "base-unit": "4px",
+                        "gutter": "20px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "mono-log": ["JetBrains Mono", "monospace"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-base": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "mono-log": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased overflow-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 h-16 flex items-center justify-between px-6 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 hidden md:flex">
+<div class="flex items-center gap-4">
+<!-- Mobile Menu Toggle (Visible only on small screens if nav was present) -->
+<button class="md:hidden text-slate-500 hover:text-slate-900 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tighter">
+                VeriServe
+            </div>
+<!-- Search Bar - On Left as per JSON -->
+<div class="hidden md:flex items-center ml-8 relative w-96">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-tech-navy focus:border-tech-navy transition-all" placeholder="Search logs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<!-- Trailing Actions -->
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-full transition-colors duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-full transition-colors duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-full transition-colors duration-200 active:scale-[0.98]">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 flex flex-col pt-20 pb-8 px-2 z-40 bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 hidden md:flex transition-all duration-150 ease-in-out">
+<div class="px-4 mb-8">
+<div class="text-lg font-bold text-slate-900 dark:text-white">VeriServe</div>
+<div class="text-xs text-slate-500 uppercase tracking-wider font-semibold mt-1">System Audit</div>
+</div>
+<div class="flex-1 flex flex-col gap-1">
+<!-- Tabs -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">policy</span>
+                Investigations
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+                Merchants
+            </a>
+<a class="flex items-center gap-3 text-slate-900 dark:text-white bg-white dark:bg-slate-800 border-r-2 border-slate-900 dark:border-slate-100 font-bold px-4 py-3 rounded-none font-['Inter'] text-sm" href="#">
+<span class="material-symbols-outlined filled text-[20px]">receipt_long</span>
+                Audit Logs
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-1 pt-4 border-t border-slate-200 dark:border-slate-800 mx-2">
+<!-- Footer Tabs -->
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-['Inter'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:pl-64 pt-16 h-screen overflow-y-auto bg-surface-container-lowest">
+<div class="p-margin-page max-w-7xl mx-auto flex flex-col gap-xl">
+<!-- Page Header & Filters -->
+<div class="flex flex-col gap-lg">
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">System Audit Logs</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Real-time verification and orchestration events.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="px-4 py-2 border border-outline-variant rounded bg-surface-container-lowest text-on-surface text-sm font-medium hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export CSV
+                        </button>
+<button class="px-4 py-2 bg-tech-navy text-on-primary rounded text-sm font-medium hover:bg-opacity-90 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Advanced Filters
+                        </button>
+</div>
+</div>
+<!-- Prominent Search Bar (In-page) -->
+<div class="relative w-full max-w-2xl bg-white border border-outline-variant rounded-md shadow-sm focus-within:border-tech-navy focus-within:ring-1 focus-within:ring-tech-navy transition-all flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-transparent border-none focus:ring-0 text-sm font-body-base text-on-surface placeholder:text-on-surface-variant" placeholder="Search by Order ID, Merchant Name, or Entity ID..." type="text"/>
+<div class="pr-2 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded text-xs font-mono-log text-on-surface-variant border border-outline-variant border-opacity-50">⌘K</span>
+</div>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase">Timestamp</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase">Event Type</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase">Merchant</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase">Entity ID</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase">Action Taken</th>
+<th class="py-3 px-4 font-label-caps text-label-caps text-on-surface-variant uppercase text-right">Integrity Score</th>
+</tr>
+</thead>
+<tbody class="font-mono-log text-mono-log text-on-surface divide-y divide-outline-variant/50">
+<!-- Row 1: Success -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap text-on-surface-variant">2023-10-24 14:32:01.452Z</td>
+<td class="py-3 px-4 whitespace-nowrap">GLM_Orchestration</td>
+<td class="py-3 px-4 whitespace-nowrap">Stripe_Connect_US</td>
+<td class="py-3 px-4 whitespace-nowrap">req_8f72a9b1c</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-success-bg text-status-success-text text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
+                                        Proceed
+                                    </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-status-success-text" style="width: 98%"></div>
+</div>
+<span class="w-8">98%</span>
+</div>
+</td>
+</tr>
+<!-- Row 2: Flagged -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap text-on-surface-variant">2023-10-24 14:31:18.901Z</td>
+<td class="py-3 px-4 whitespace-nowrap">Vision_Analysis</td>
+<td class="py-3 px-4 whitespace-nowrap">Shopify_EU_Main</td>
+<td class="py-3 px-4 whitespace-nowrap">img_k9m2p4x7v</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-flagged-bg text-status-flagged-text text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px] mr-1">warning</span>
+                                        Review_Required
+                                    </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-status-flagged-text" style="width: 45%"></div>
+</div>
+<span class="w-8">45%</span>
+</div>
+</td>
+</tr>
+<!-- Row 3: Success -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap text-on-surface-variant">2023-10-24 14:30:05.112Z</td>
+<td class="py-3 px-4 whitespace-nowrap">Mock_Refund_Trigger</td>
+<td class="py-3 px-4 whitespace-nowrap">PayPal_Sandbox</td>
+<td class="py-3 px-4 whitespace-nowrap">ref_tx_9921</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-success-bg text-status-success-text text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
+                                        Simulated
+                                    </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-status-success-text" style="width: 100%"></div>
+</div>
+<span class="w-8">100%</span>
+</div>
+</td>
+</tr>
+<!-- Row 4: Error -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap text-on-surface-variant">2023-10-24 14:28:44.883Z</td>
+<td class="py-3 px-4 whitespace-nowrap text-status-error-text">Manual_Escalation</td>
+<td class="py-3 px-4 whitespace-nowrap">Square_POS_NYC</td>
+<td class="py-3 px-4 whitespace-nowrap">usr_j2l4m6n8</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-error-bg text-status-error-text text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px] mr-1">error</span>
+                                        Halted
+                                    </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-status-error-text" style="width: 12%"></div>
+</div>
+<span class="w-8 text-status-error-text">12%</span>
+</div>
+</td>
+</tr>
+<!-- Row 5: Success -->
+<tr class="hover:bg-surface-container/30 transition-colors group">
+<td class="py-3 px-4 whitespace-nowrap text-on-surface-variant">2023-10-24 14:25:11.002Z</td>
+<td class="py-3 px-4 whitespace-nowrap">GLM_Orchestration</td>
+<td class="py-3 px-4 whitespace-nowrap">Adyen_Global</td>
+<td class="py-3 px-4 whitespace-nowrap">req_3v8b2n1m</td>
+<td class="py-3 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-success-bg text-status-success-text text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px] mr-1">check_circle</span>
+                                        Proceed
+                                    </span>
+</td>
+<td class="py-3 px-4 whitespace-nowrap text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-status-success-text" style="width: 95%"></div>
+</div>
+<span class="w-8">95%</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-4 py-3 border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between">
+<span class="text-sm font-body-sm text-on-surface-variant">Showing 1 to 5 of 1,248 entries</span>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded bg-tech-navy text-on-primary text-sm font-medium">1</button>
+<button class="px-3 py-1 rounded text-on-surface hover:bg-surface-container-low text-sm font-medium transition-colors">2</button>
+<button class="px-3 py-1 rounded text-on-surface hover:bg-surface-container-low text-sm font-medium transition-colors">3</button>
+<span class="px-2 text-on-surface-variant">...</span>
+<button class="p-1 rounded text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Quick Stats Bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mt-sm">
+<div class="p-lg border border-outline-variant rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-sm relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-status-success-bg rounded-full opacity-50 blur-xl"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Avg Integrity Score</span>
+<div class="font-display-xl text-display-xl text-on-surface">94.2%</div>
+<div class="text-status-success-text text-sm flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +2.1% from yesterday
+                    </div>
+</div>
+<div class="p-lg border border-outline-variant rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-sm relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-status-error-bg rounded-full opacity-50 blur-xl"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Escalation Rate</span>
+<div class="font-display-xl text-display-xl text-on-surface">1.8%</div>
+<div class="text-status-error-text text-sm flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +0.4% from yesterday
+                    </div>
+</div>
+<div class="p-lg border border-outline-variant rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-sm relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-fixed rounded-full opacity-50 blur-xl"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Active Investigations</span>
+<div class="font-display-xl text-display-xl text-on-surface">142</div>
+<div class="text-on-surface-variant text-sm flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[16px]">sync</span> Updating live
+                    </div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

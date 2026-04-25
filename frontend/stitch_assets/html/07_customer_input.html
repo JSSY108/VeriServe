@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VeriServe - Mobile Resolution Portal Demo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "tertiary-fixed": "#dde3eb",
+                            "on-tertiary-fixed": "#161c22",
+                            "primary-fixed-dim": "#b9c7e4",
+                            "surface-container-highest": "#e4e2e4",
+                            "on-surface-variant": "#44474d",
+                            "inverse-on-surface": "#f2f0f2",
+                            "surface-container-high": "#eae7ea",
+                            "surface-dim": "#dbd9db",
+                            "surface": "#fbf9fb",
+                            "secondary-fixed-dim": "#b8c8da",
+                            "error-container": "#ffdad6",
+                            "primary": "#000000",
+                            "on-tertiary-container": "#7e848c",
+                            "on-background": "#1b1b1d",
+                            "on-primary": "#ffffff",
+                            "primary-container": "#0d1c32",
+                            "inverse-surface": "#303032",
+                            "tertiary-container": "#161c22",
+                            "secondary": "#50606f",
+                            "on-tertiary": "#ffffff",
+                            "secondary-fixed": "#d4e4f6",
+                            "surface-variant": "#e4e2e4",
+                            "surface-container-low": "#f5f3f5",
+                            "on-primary-container": "#76849f",
+                            "inverse-primary": "#b9c7e4",
+                            "tertiary-fixed-dim": "#c1c7cf",
+                            "surface-container": "#efedef",
+                            "surface-tint": "#515f78",
+                            "secondary-container": "#d1e1f4",
+                            "on-secondary-fixed": "#0d1d2a",
+                            "outline": "#75777e",
+                            "on-tertiary-fixed-variant": "#41474e",
+                            "on-secondary-fixed-variant": "#394857",
+                            "on-primary-fixed-variant": "#39475f",
+                            "on-secondary-container": "#556474",
+                            "error": "#ba1a1a",
+                            "tertiary": "#000000",
+                            "on-secondary": "#ffffff",
+                            "on-primary-fixed": "#0d1c32",
+                            "on-error": "#ffffff",
+                            "primary-fixed": "#d6e3ff",
+                            "surface-bright": "#fbf9fb",
+                            "on-surface": "#1b1b1d",
+                            "outline-variant": "#c5c6cd",
+                            "background": "#fbf9fb",
+                            "on-error-container": "#93000a",
+                            "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "xs": "4px",
+                            "lg": "24px",
+                            "md": "16px",
+                            "margin-page": "40px",
+                            "gutter": "20px",
+                            "base-unit": "4px",
+                            "xl": "32px",
+                            "sm": "8px"
+                    },
+                    "fontFamily": {
+                            "body-base": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "display-xl": ["Inter"],
+                            "mono-log": ["Inter"],
+                            "label-caps": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                            "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                            "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                            "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                            "mono-log": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                            "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>.blurred-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD6CN_XQh_Rjne1jZAWjDbVUhP39rlQWArMPQ4FfXek52Hz2wTelQOQO353DKHr2pg4mak6fakyCzvXtmNYMntdy2nPJXyBn3HW3ckNdQhV5bwMNjKmksB8sbL_fsvpclcnL2otOr5obJrCti1DpfbBJkwfrSmYPZtIkFuGS0PFteBcJXbpUdm94YNvq_WCnNYmy1DUq4RV9KJLQDyxDhj-hTrbgL4-lp713_R0uajYhKohTZGRivuFgsQskcOdrlAuwx843pLchR4);
+    background-size: cover;
+    background-position: center;
+    filter: blur(16px) brightness(0.4);
+    position: absolute;
+    inset: 0;
+    z-index: 0
+    }
+.phone-frame {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 0 4px #e4e2e4, inset 0 0 0 8px #fbf9fb
+    }</style>
+</head>
+<body class="bg-background min-h-screen relative overflow-hidden flex items-center justify-center font-body-base text-body-base">
+<!-- Blurred Background Map/Dashboard -->
+<div class="blurred-bg" data-alt="Dark, blurred financial dashboard with charts and maps, heavily obscured"></div>
+<!-- Main Container -->
+<main class="relative z-10 w-full max-w-[1440px] h-screen flex items-center justify-center p-margin-page">
+<!-- Mobile Device Frame -->
+<div class="w-[390px] h-[844px] bg-surface rounded-[40px] overflow-hidden phone-frame relative flex flex-col">
+<!-- Mobile Header -->
+<header class="bg-surface px-md pt-[50px] pb-md border-b border-surface-container-highest z-20">
+<div class="flex flex-col items-center gap-xs text-center">
+<h1 class="font-headline-md text-headline-md text-on-surface">Partner Resolution Portal</h1>
+<div class="flex items-center gap-xs bg-surface-container-low px-sm py-xs rounded-full">
+<span class="material-symbols-outlined text-[14px] text-primary" data-weight="fill">verified</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Powered by VeriServe</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-md py-lg space-y-lg bg-background">
+<!-- Search Section -->
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Order Lookup</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<div class="w-6 h-6 bg-primary-container text-on-primary rounded flex items-center justify-center font-bold text-[10px]">SH</div>
+</div>
+<input class="w-full pl-[40px] pr-md py-sm border border-outline-variant rounded-lg bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm transition-colors" placeholder="Enter Order ID (e.g., SHP-992)" type="text"/>
+</div>
+</div>
+<!-- Form Section -->
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Issue Description</label>
+<textarea class="w-full p-md border border-outline-variant rounded-lg bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm min-h-[120px] transition-colors" placeholder="E.g., The box arrived completely crushed..."></textarea>
+<!-- AI Feedback Badge -->
+<div class="flex items-start gap-sm bg-secondary-fixed-dim/20 p-sm rounded-lg border border-secondary-fixed-dim/30">
+<span class="material-symbols-outlined text-primary text-[18px]">auto_awesome</span>
+<p class="font-mono-log text-mono-log text-on-surface-variant">VeriServe AI categorizing as: <span class="text-primary font-semibold">Electronics / Physical Damage</span></p>
+</div>
+</div>
+<!-- Evidence Section -->
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Evidence Upload</label>
+<div class="grid grid-cols-3 gap-sm">
+<div class="aspect-square rounded-lg border border-outline-variant overflow-hidden relative">
+<img alt="Shattered monitor screen" class="object-cover w-full h-full" data-alt="Close up of a shattered computer monitor screen with spiderweb cracks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr7o5Re7eI0LYRCn4fi0WQ8Dyl1M5_BI9U-lQIVJP-fEwc9SgX_kLBhkQx1arQAFjCh8eFqALKYIWj82dnroIADl1gJ9Ic-8lhgcsnGavw-L_HX0OtlHb5enX3S9hU8qbDRC1cjtmFJHtVXpoxnTfi4nZmXzGwheYav3R_XhbxJUjKWMSgwsuc8spcWfWsL5TzNSu0s1h1UzHq_Wq6Xvtvs_zxOCDVg5sfGCny_dAjcWaBH2Bi-qecOO3dLdS6Fh21LXRPJooAEXA"/>
+<div class="absolute top-xs right-xs bg-surface/80 rounded-full w-5 h-5 flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-error">close</span>
+</div>
+</div>
+<button class="aspect-square rounded-lg border-2 border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center gap-xs hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+<span class="font-label-caps text-label-caps uppercase">Add Photo</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary py-md rounded-lg font-headline-md text-headline-md hover:bg-primary/90 transition-colors shadow-sm">
+                    Submit Claim for Verification
+                </button>
+<hr class="border-surface-container-highest my-lg"/>
+<!-- History Section -->
+<div class="space-y-md pb-[80px]">
+<h2 class="font-headline-md text-headline-md text-on-surface">Recent Resolutions</h2>
+<div class="space-y-sm">
+<!-- Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-body-base text-body-base font-semibold text-on-surface">Claim #GF-994</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">10m ago</span>
+</div>
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[18px] animate-pulse">sync</span>
+<span class="font-body-sm text-body-sm">Verifying with Rider Data...</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md space-y-sm cursor-pointer hover:border-primary transition-colors">
+<div class="flex justify-between items-center">
+<span class="font-body-base text-body-base font-semibold text-on-surface">Claim #ZAL-883</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">2h ago</span>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs text-[#059669]">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">check_circle</span>
+<span class="font-body-sm text-body-sm font-medium">Refund Approved.</span>
+</div>
+<span class="font-mono-log text-mono-log text-on-surface-variant underline decoration-outline-variant underline-offset-2">Click to view Verification Trace.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Home Indicator (iOS style) -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-on-surface rounded-full z-20"></div>
+</div>
+<!-- Floating God Mode Toggle -->
+<button class="absolute bottom-margin-page right-margin-page bg-primary-container text-on-primary rounded-full px-lg py-md flex items-center gap-sm shadow-[0_8px_24px_rgba(0,0,0,0.4)] hover:scale-105 transition-transform z-30">
+<span class="material-symbols-outlined" data-weight="fill">admin_panel_settings</span>
+<span class="font-headline-md text-[16px]">Switch to God Mode</span>
+</button>
+</main>
+</body></html>

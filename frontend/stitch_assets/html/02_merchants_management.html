@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Merchant Management - VeriServe</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#efedef",
+                        "surface": "#fbf9fb",
+                        "surface-bright": "#fbf9fb",
+                        "outline": "#75777e",
+                        "inverse-surface": "#303032",
+                        "surface-container-high": "#eae7ea",
+                        "on-background": "#1b1b1d",
+                        "tertiary-container": "#161c22",
+                        "secondary": "#50606f",
+                        "on-secondary-fixed": "#0d1d2a",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "on-surface": "#1b1b1d",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#39475f",
+                        "secondary-fixed": "#d4e4f6",
+                        "surface-tint": "#515f78",
+                        "secondary-fixed-dim": "#b8c8da",
+                        "on-primary-container": "#76849f",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#161c22",
+                        "surface-container-low": "#f5f3f5",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f2f0f2",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#000000",
+                        "outline-variant": "#c5c6cd",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary-container": "#d1e1f4",
+                        "primary-container": "#0d1c32",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "on-tertiary-container": "#7e848c",
+                        "on-secondary-fixed-variant": "#394857",
+                        "primary-fixed": "#d6e3ff",
+                        "background": "#fbf9fb",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "tertiary-fixed": "#dde3eb",
+                        "on-surface-variant": "#44474d",
+                        "on-primary-fixed": "#0d1c32",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "surface-variant": "#e4e2e4",
+                        "inverse-primary": "#b9c7e4",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dbd9db",
+                        "on-secondary-container": "#556474"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "md": "16px",
+                        "gutter": "20px",
+                        "base-unit": "4px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin-page": "40px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "mono-log": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Inter"]
+                    },
+                    "fontSize": {
+                        "mono-log": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0d1c32; /* primary-container */
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0d1c32; /* primary-container */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base text-body-base min-h-screen antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-surface-container-lowest h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col h-full py-6 z-50">
+<!-- Header -->
+<div class="px-lg mb-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded-DEFAULT bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined icon-fill text-sm">shield</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black tracking-tighter text-primary-container leading-none">VeriServe</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant leading-none mt-1">Trust Engine</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<ul class="flex flex-col flex-1 px-sm gap-xs">
+<!-- Investigations (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">search_check</span>
+<span class="font-body-sm text-body-sm font-medium">Investigations</span>
+</a>
+</li>
+<!-- Merchants (Active) -->
+<li>
+<a class="flex items-center gap-3 px-md py-sm rounded-lg bg-surface-container-low text-primary-container border-r-2 border-primary-container font-semibold cursor-pointer active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined icon-fill">storefront</span>
+<span class="font-body-sm text-body-sm">Merchants</span>
+</a>
+</li>
+<!-- Audit Logs (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-body-sm text-body-sm font-medium">Audit Logs</span>
+</a>
+</li>
+</ul>
+<!-- User Profile Area (Bottom) -->
+<div class="px-lg mt-auto border-t border-outline-variant pt-lg">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="close up portrait of a professional man with short hair and a neat beard, wearing a dark shirt against a soft neutral background, well lit studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0oDyI3tgbfic3C5pKvuZszHkbIuimgPzLNCOeQyBdJBAw5tHJ5BApXUanQnGwLxVh029HERiIL9kXNqH8M2IJFY8hgO9EIaZHwImwET9OcqBnZWJl911N9AhXnt05tf5Uu5l1XxXvRrJIT1k4NkX8__pOR5NLTXYsa5iqQVl-5kuUBh8KzqsRQP87SMp3Pp0xvNA-ycoSaTIMIJDtr2Rm_i5QPkmRUX9RpLs0s_L7Izfne7ZKheuSSVNjSRjlKfvLHUTKNPOGLHc"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Admin User</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">System Ops</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar (from JSON) -->
+<header class="bg-surface-container-lowest/80 backdrop-blur-md fixed top-0 right-0 left-64 h-16 border-b border-outline-variant z-40 flex items-center justify-between px-8 w-[calc(100%-16rem)]">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary-container">Merchant Management</h2>
+</div>
+<div class="flex items-center gap-lg">
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-4 py-2 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow" placeholder="Search merchants..." type="text"/>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<button class="p-sm rounded-full hover:bg-surface-container transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border border-surface-container-lowest"></span>
+</button>
+<button class="p-sm rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-xl">
+<!-- Page Actions / Header -->
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Integrated Platforms</h3>
+<div class="flex gap-md">
+<button class="flex items-center gap-2 px-md py-2 border border-outline-variant rounded-DEFAULT font-label-caps text-label-caps text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                    Filter
+                </button>
+<button class="flex items-center gap-2 px-md py-2 bg-primary-container text-on-primary rounded-DEFAULT font-label-caps text-label-caps shadow-sm hover:bg-tertiary-container transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Onboard Merchant
+                </button>
+</div>
+</div>
+<!-- Grid Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-lg">
+<!-- Card 1: Shopee -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col relative group hover:border-primary-container transition-colors shadow-sm">
+<!-- Header: Logo, Name, Toggle -->
+<div class="flex items-start justify-between mb-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-[#FF5722]/10 border border-[#FF5722]/20 flex items-center justify-center text-[#FF5722]">
+<span class="material-symbols-outlined icon-fill">shopping_bag</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface leading-tight">Shopee</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">E-Commerce Marketplace</span>
+</div>
+</div>
+<!-- Policy Status Toggle -->
+<div class="flex flex-col items-end gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Policy Active</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle_shopee" name="toggle_shopee" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle_shopee"></label>
+</div>
+</div>
+</div>
+<!-- Active Claims Metric -->
+<div class="mb-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-error-container/30 border border-error-container text-on-surface">
+<span class="material-symbols-outlined text-sm text-error">warning</span>
+<span class="font-label-caps text-label-caps"><span class="text-error font-bold">24</span> Active Claims</span>
+</div>
+</div>
+<!-- Configuration Reasoning Log style -->
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md mb-lg mt-auto">
+<div class="flex items-center gap-2 mb-2 pb-2 border-b border-outline-variant">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">settings_suggest</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active Configuration</span>
+</div>
+<ul class="font-mono-log text-mono-log text-on-surface space-y-1">
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Auto-Refund Threshold:</span>
+<span class="font-medium">RM 50.00</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Verification Mode:</span>
+<span class="font-medium text-right w-2/3 truncate" title="Dual-Factor (Rider + Package)">Dual-Factor (Rider + Package)</span>
+</li>
+</ul>
+</div>
+<!-- Action Button -->
+<button class="w-full py-2 bg-surface-container border border-outline-variant text-on-surface font-label-caps text-label-caps rounded-DEFAULT hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_document</span>
+                    Manage Policy
+                </button>
+</article>
+<!-- Card 2: GrabFood -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col relative group hover:border-primary-container transition-colors shadow-sm">
+<div class="flex items-start justify-between mb-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-[#00B14F]/10 border border-[#00B14F]/20 flex items-center justify-center text-[#00B14F]">
+<span class="material-symbols-outlined icon-fill">two_wheeler</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface leading-tight">GrabFood</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">On-Demand Delivery</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Policy Active</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle_grab" name="toggle_grab" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle_grab"></label>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant text-on-surface">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">receipt_long</span>
+<span class="font-label-caps text-label-caps">12 Active Claims</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md mb-lg mt-auto">
+<div class="flex items-center gap-2 mb-2 pb-2 border-b border-outline-variant">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">settings_suggest</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active Configuration</span>
+</div>
+<ul class="font-mono-log text-mono-log text-on-surface space-y-1">
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Auto-Refund Threshold:</span>
+<span class="font-medium">RM 30.00</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Verification Mode:</span>
+<span class="font-medium text-right w-2/3 truncate" title="Photo Proof Required">Photo Proof Required</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-2 bg-surface-container border border-outline-variant text-on-surface font-label-caps text-label-caps rounded-DEFAULT hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_document</span>
+                    Manage Policy
+                </button>
+</article>
+<!-- Card 3: Zalora -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col relative group hover:border-primary-container transition-colors shadow-sm opacity-75">
+<div class="flex items-start justify-between mb-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant flex items-center justify-center text-on-surface-variant grayscale">
+<span class="material-symbols-outlined">checkroom</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface leading-tight">Zalora</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Fashion Retail</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Policy Inactive</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle_zalora" name="toggle_zalora" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle_zalora"></label>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="font-label-caps text-label-caps">0 Active Claims</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md mb-lg mt-auto opacity-50 pointer-events-none">
+<div class="flex items-center gap-2 mb-2 pb-2 border-b border-outline-variant">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">settings_suggest</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Draft Configuration</span>
+</div>
+<ul class="font-mono-log text-mono-log text-on-surface space-y-1">
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Auto-Refund Threshold:</span>
+<span class="font-medium">RM 150.00</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Verification Mode:</span>
+<span class="font-medium text-right w-2/3 truncate" title="Return Logistics Scan">Return Logistics Scan</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-2 bg-primary-container text-on-primary font-label-caps text-label-caps rounded-DEFAULT hover:bg-tertiary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">power_settings_new</span>
+                    Activate Policy
+                </button>
+</article>
+<!-- Card 4: DHL -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col relative group hover:border-primary-container transition-colors shadow-sm">
+<div class="flex items-start justify-between mb-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-[#FFCC00]/20 border border-[#FFCC00]/40 flex items-center justify-center text-[#D40511]">
+<span class="material-symbols-outlined icon-fill">local_shipping</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface leading-tight">DHL</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Global Logistics</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Policy Active</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle_dhl" name="toggle_dhl" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle_dhl"></label>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant text-on-surface">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">package_2</span>
+<span class="font-label-caps text-label-caps">8 Active Claims</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md mb-lg mt-auto">
+<div class="flex items-center gap-2 mb-2 pb-2 border-b border-outline-variant">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">settings_suggest</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active Configuration</span>
+</div>
+<ul class="font-mono-log text-mono-log text-on-surface space-y-1">
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Auto-Refund Threshold:</span>
+<span class="font-medium">N/A (Manual)</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Verification Mode:</span>
+<span class="font-medium text-right w-2/3 truncate" title="Warehouse Weight Check">Warehouse Weight Check</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-2 bg-surface-container border border-outline-variant text-on-surface font-label-caps text-label-caps rounded-DEFAULT hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_document</span>
+                    Manage Policy
+                </button>
+</article>
+<!-- Card 5: Apple Store -->
+<article class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col relative group hover:border-primary-container transition-colors shadow-sm">
+<div class="flex items-start justify-between mb-md">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">devices</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface leading-tight">Apple Store</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Premium Electronics</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Policy Active</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-container-lowest border-2 border-outline-variant appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="toggle_apple" name="toggle_apple" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-outline-variant cursor-pointer transition-colors duration-200 ease-in-out" for="toggle_apple"></label>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant text-on-surface">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">shield_locked</span>
+<span class="font-label-caps text-label-caps">2 Active Claims</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md mb-lg mt-auto">
+<div class="flex items-center gap-2 mb-2 pb-2 border-b border-outline-variant">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">settings_suggest</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active Configuration</span>
+</div>
+<ul class="font-mono-log text-mono-log text-on-surface space-y-1">
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Auto-Refund Threshold:</span>
+<span class="font-medium">RM 0.00</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Verification Mode:</span>
+<span class="font-medium text-right w-2/3 truncate" title="Serial Number Match">Serial Number Match</span>
+</li>
+</ul>
+</div>
+<button class="w-full py-2 bg-surface-container border border-outline-variant text-on-surface font-label-caps text-label-caps rounded-DEFAULT hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_document</span>
+                    Manage Policy
+                </button>
+</article>
+<!-- Placeholder for New Integration -->
+<article class="bg-surface-container border border-dashed border-outline-variant rounded-xl p-lg flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-low transition-colors h-full min-h-[300px]">
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest border border-outline-variant flex items-center justify-center mb-md text-primary-container">
+<span class="material-symbols-outlined text-3xl">add_business</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-1">Add Merchant</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-[200px]">Connect a new platform via API or configure manual upload.</p>
+</article>
+</div>
+</main>
+</body></html>

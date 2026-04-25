@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shopee Electronics - Claims Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1b1b1d",
+                        "primary": "#000000",
+                        "on-secondary-fixed-variant": "#394857",
+                        "on-secondary-container": "#556474",
+                        "on-primary-fixed": "#0d1c32",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "outline-variant": "#c5c6cd",
+                        "tertiary-fixed": "#dde3eb",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#000000",
+                        "tertiary-container": "#161c22",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae7ea",
+                        "primary-container": "#0d1c32",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f2f0f2",
+                        "inverse-primary": "#b9c7e4",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "secondary": "#50606f",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b8c8da",
+                        "on-surface-variant": "#44474d",
+                        "on-primary-fixed-variant": "#39475f",
+                        "surface-variant": "#e4e2e4",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-primary-container": "#76849f",
+                        "surface-container": "#efedef",
+                        "on-background": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary-container": "#d1e1f4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d6e3ff",
+                        "outline": "#75777e",
+                        "inverse-surface": "#303032",
+                        "surface-bright": "#fbf9fb",
+                        "surface-container-low": "#f5f3f5",
+                        "on-secondary-fixed": "#0d1d2a",
+                        "surface": "#fbf9fb",
+                        "on-tertiary-container": "#7e848c",
+                        "background": "#fbf9fb",
+                        "surface-tint": "#515f78",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dbd9db",
+                        "secondary-fixed": "#d4e4f6",
+                        "success-green": "#16a34a",
+                        "success-green-light": "#dcfce7",
+                        "alert-orange": "#f97316",
+                        "alert-orange-light": "#ffedd5",
+                        "error-red": "#ef4444",
+                        "error-red-light": "#fee2e2",
+                        "sovereign-blue": "#002D62",
+                        "slate-gray": "#708090"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "margin-page": "40px",
+                        "base-unit": "4px",
+                        "lg": "24px",
+                        "gutter": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-base": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "mono-log": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "mono-log": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-base flex relative">
+<!-- SideNavBar -->
+<nav class="bg-sovereign-blue text-slate-100 font-inter text-sm font-semibold tracking-tight docked h-screen w-64 border-r border-sovereign-blue flat no shadows fixed left-0 top-0 h-full flex flex-col p-4 z-40 hidden md:flex">
+<div class="mb-lg flex items-center gap-sm px-sm py-sm">
+<div class="w-8 h-8 rounded-full bg-slate-gray flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assured_workload</span>
+</div>
+<div>
+<div class="text-xl font-bold text-white">VeriServe Ops</div>
+<div class="font-body-sm text-slate-300 font-medium">Fintech Logistics</div>
+</div>
+</div>
+<button class="bg-white text-sovereign-blue hover:bg-slate-200 transition-colors py-sm px-md rounded-lg font-label-caps uppercase flex items-center justify-center gap-xs mb-lg w-full font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            New Claim
+        </button>
+<div class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-md py-sm text-slate-300 hover:bg-slate-gray/50 hover:text-white duration-200 ease-in-out transition-all rounded-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Operational Overview
+            </a>
+<a class="flex items-center gap-sm px-md py-sm bg-slate-gray text-white rounded-md duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+                Investigations
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-slate-300 hover:bg-slate-gray/50 hover:text-white duration-200 ease-in-out transition-all rounded-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Merchant Config
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-slate-300 hover:bg-slate-gray/50 hover:text-white duration-200 ease-in-out transition-all rounded-md" href="#">
+<span class="material-symbols-outlined">terminal</span>
+                System Audit Logs
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-xs pt-md border-t border-slate-gray/30">
+<a class="flex items-center gap-sm px-md py-sm text-slate-300 hover:bg-slate-gray/50 hover:text-white duration-200 ease-in-out transition-all rounded-md" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-slate-300 hover:bg-slate-gray/50 hover:text-white duration-200 ease-in-out transition-all rounded-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 font-inter antialiased text-sm font-medium docked full-width top-0 border-b border-b border-slate-200 dark:border-slate-800 flat no shadows flex justify-between items-center w-full px-6 h-16 sticky top-0 z-30">
+<div class="flex items-center gap-md">
+<div class="text-lg font-black tracking-tight text-slate-900 dark:text-white">Shopee Electronics</div>
+<div class="hidden lg:flex items-center gap-md ml-lg">
+<a class="text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-white pb-4 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer active:opacity-70 transition-all pt-4" href="#">Claims Queue</a>
+<a class="text-slate-500 dark:text-slate-400 pb-4 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer active:opacity-70 transition-all pt-4" href="#">Analytics</a>
+<a class="text-slate-500 dark:text-slate-400 pb-4 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer active:opacity-70 transition-all pt-4" href="#">Merchant Info</a>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="mr-4">
+<label class="sr-only" for="merchant-switch">Switch Merchant</label>
+<select class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-sovereign-blue sm:text-sm sm:leading-6" id="merchant-switch" name="merchant">
+<option>Shopee</option>
+<option>GrabFood</option>
+<option>Zalora</option>
+</select>
+</div>
+<button class="p-sm rounded-full hover:bg-surface-variant transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm rounded-full hover:bg-surface-variant transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container ml-sm overflow-hidden border border-outline-variant">
+<img alt="Merchant Profile Avatar" class="w-full h-full object-cover" data-alt="professional headshot of a person wearing a blue shirt against a neutral gray background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHPTKjrGS_Abw_aRBlu7O7l9PheCDk08NK9yPuBU6iVyTs5U42_bzfeQSi6a3sEnnld5HVJXN3QxPsdnRdfORRDn6o_IRqgTlgnh3ROX8UjWRyWTN4ncqAz-Erv4U53iyBIdhMhWKJgWm51proVdjbAtdCR9TbqLWr0otUWFooNOBQ50sbBu9CbspkTzJ8XHYSNy9xSMOr8TuLJvWPHWKwV8ccguA2ZsfEPjfAn0hmXtDiJFOgUjwqGe6Jgk2mlMPxfaT3aRKJXYU"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-md lg:p-margin-page overflow-auto bg-surface relative">
+<!-- Context Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-xl gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Claims Queue</h1>
+<div class="flex items-center gap-sm font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-medium text-on-surface">Merchant:</span> Shopee
+                        <span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-medium text-on-surface">Category:</span> Electronics
+                    </div>
+</div>
+<button class="bg-success-green text-on-primary hover:bg-success-green/90 transition-colors py-sm px-lg rounded-lg font-label-caps uppercase flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">done_all</span>
+                    Batch Approve Low-Risk
+                </button>
+</div>
+<!-- List Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-sm p-md bg-surface-container-low border-b border-outline-variant font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider items-center">
+<div class="col-span-2">Claim ID</div>
+<div class="col-span-3">Item Name</div>
+<div class="col-span-2">Submission Time</div>
+<div class="col-span-2 text-center">AI Confidence</div>
+<div class="col-span-2">Risk Priority</div>
+<div class="col-span-1">Status</div>
+</div>
+<!-- List Items -->
+<div class="flex flex-col">
+<!-- Row 1 -->
+<div class="grid grid-cols-12 gap-sm p-md border-b border-outline-variant items-center hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="col-span-2 font-mono-log text-mono-log text-on-surface group-hover:text-primary transition-colors">#CL-882</div>
+<div class="col-span-3 font-body-sm text-body-sm text-on-surface font-medium">iPhone 15 Pro</div>
+<div class="col-span-2 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                            2 mins ago
+                        </div>
+<div class="col-span-2 flex flex-col items-center justify-center gap-xs">
+<div class="font-label-caps text-label-caps text-success-green">98%</div>
+<div class="w-full max-w-[80px] h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-success-green rounded-full" style="width: 98%;"></div>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-success-green-light text-success-green font-label-caps text-label-caps">
+                                Low Risk
+                            </span>
+</div>
+<div class="col-span-1 font-body-sm text-body-sm text-on-surface-variant">Pending</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 gap-sm p-md border-b border-outline-variant items-center hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="col-span-2 font-mono-log text-mono-log text-on-surface group-hover:text-primary transition-colors">#CL-881</div>
+<div class="col-span-3 font-body-sm text-body-sm text-on-surface font-medium">Sony WH-1000XM5</div>
+<div class="col-span-2 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                            15 mins ago
+                        </div>
+<div class="col-span-2 flex flex-col items-center justify-center gap-xs">
+<div class="font-label-caps text-label-caps text-error-red">42%</div>
+<div class="w-full max-w-[80px] h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error-red rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-error-red-light text-error-red font-label-caps text-label-caps">
+                                High Risk
+                            </span>
+</div>
+<div class="col-span-1 font-body-sm text-body-sm text-on-surface-variant">Review Req.</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 gap-sm p-md items-center hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="col-span-2 font-mono-log text-mono-log text-on-surface group-hover:text-primary transition-colors">#CL-880</div>
+<div class="col-span-3 font-body-sm text-body-sm text-on-surface font-medium">MacBook Air M2</div>
+<div class="col-span-2 font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                            1 hour ago
+                        </div>
+<div class="col-span-2 flex flex-col items-center justify-center gap-xs">
+<div class="font-label-caps text-label-caps text-alert-orange">85%</div>
+<div class="w-full max-w-[80px] h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-alert-orange rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-alert-orange-light text-alert-orange font-label-caps text-label-caps">
+                                Medium Risk
+                            </span>
+</div>
+<div class="col-span-1 font-body-sm text-body-sm text-on-surface-variant">Flagged</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Footer -->
+<div class="mt-md flex justify-between items-center px-xs text-on-surface-variant font-body-sm text-body-sm">
+<div>Showing 1-3 of 24 claims</div>
+<div class="flex gap-xs">
+<button class="p-xs rounded hover:bg-surface-container-high transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="p-xs rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button -->
+<button class="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-slate-900/80 px-4 py-2 font-label-caps text-label-caps uppercase text-white shadow-lg backdrop-blur-md transition-all hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-sovereign-blue focus:ring-offset-2">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+    Mode Switch
+</button>
+</body></html>

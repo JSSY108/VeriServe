@@ -5,7 +5,8 @@ from pydantic import BaseModel, Field
 
 class OrchestrateRequest(BaseModel):
     order_id: int
-    customer_claim: str
+    user_category_selection: str | None = None
+    complaint_text: str
     customer_image_url: str
 
 
@@ -32,14 +33,21 @@ class RefundResponse(BaseModel):
     tx_id: str
 
 
-class GLMDecision(BaseModel):
-    action: str = Field(..., pattern="^(refund|escalate)$")
-    reason: str
-    confidence: float
+class TraceEntry(BaseModel):
+    agent: str
+    action: str
+    result: str
+
+
+class MultiAgentDecision(BaseModel):
+    trace_log: list[TraceEntry]
+    final_action: str = Field(..., pattern="^(APPROVE_REFUND|MANUAL_ESCALATION|REJECT_FRAUD)$")
+    confidence_score: float
 
 
 class OrchestrateResponse(BaseModel):
     ticket_id: int
     ticket_status: str
     vision_match_score: float
-    glm_decision: GLMDecision
+    glm_decision: MultiAgentDecision
+    rider_pod_url: str | None = None

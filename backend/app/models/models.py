@@ -15,6 +15,14 @@ class User(Base):
     orders: Mapped[list["Order"]] = relationship(back_populates="customer")
 
 
+class MerchantConfig(Base):
+    __tablename__ = "merchant_config"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    merchant_name: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
+    auto_refund_limit: Mapped[float] = mapped_column(Float, nullable=False)
+
+
 class Order(Base):
     __tablename__ = "orders"
 
@@ -39,6 +47,9 @@ class Ticket(Base):
     customer_image_url: Mapped[str] = mapped_column(Text, nullable=False)
     vision_match_score: Mapped[float | None] = mapped_column(Float, nullable=True)
     status: Mapped[str] = mapped_column(String(20), nullable=False, default="pending")
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False, default=lambda: datetime.now(timezone.utc)
+    )
 
     order: Mapped["Order"] = relationship(back_populates="tickets")
     audit_logs: Mapped[list["AuditLog"]] = relationship(back_populates="ticket")

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Veracity Precision - Demo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#e2e2e2",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#d4e4f6",
+                    "surface-bright": "#f9f9f9",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#d6e3ff",
+                    "secondary": "#50606f",
+                    "on-surface-variant": "#4c4546",
+                    "inverse-primary": "#c6c6c6",
+                    "outline": "#7e7576",
+                    "surface-container": "#eeeeee",
+                    "surface-tint": "#5e5e5e",
+                    "on-tertiary-container": "#76849f",
+                    "on-primary-fixed-variant": "#474747",
+                    "on-secondary-container": "#546473",
+                    "on-error-container": "#93000a",
+                    "background": "#f9f9f9",
+                    "tertiary-container": "#0d1c32",
+                    "on-background": "#1b1b1b",
+                    "on-surface": "#1b1b1b",
+                    "secondary-container": "#d1e2f3",
+                    "on-primary-fixed": "#1b1b1b",
+                    "surface": "#f9f9f9",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#b9c7e4",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "surface-dim": "#dadada",
+                    "on-secondary-fixed": "#0c1d2a",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#1b1b1b",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-fixed-variant": "#39475f",
+                    "primary": "#000000",
+                    "secondary-fixed-dim": "#b8c8da",
+                    "on-tertiary-fixed": "#0d1c32",
+                    "tertiary": "#000000",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#303030",
+                    "inverse-on-surface": "#f1f1f1",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "on-primary-container": "#848484",
+                    "on-secondary-fixed-variant": "#394857",
+                    "surface-container-low": "#f3f3f3",
+                    "outline-variant": "#cfc4c5",
+                    "sovereign-blue": "#002D62",
+                    "slate-gray": "#708090"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xl": "32px",
+                    "gutter": "20px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "margin-page": "40px",
+                    "base-unit": "4px"
+            },
+            "fontFamily": {
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "body-base": [
+                            "Inter"
+                    ],
+                    "display-xl": [
+                            "Inter"
+                    ],
+                    "mono-log": [
+                            "Inter"
+                    ],
+                    "label-caps": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-base": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-xl": [
+                            "36px",
+                            {
+                                    "lineHeight": "44px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "mono-log": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .blurred-bg {
+            filter: blur(12px) brightness(0.4);
+            transform: scale(1.05); /* Prevent blurred edges from pulling in background color */
+        }
+        
+        .phone-frame {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex items-center justify-center relative bg-tertiary-container text-on-background font-body-base">
+<!-- Blurred Background (Admin Dashboard Mock) -->
+<div aria-hidden="true" class="absolute inset-0 z-0 blurred-bg pointer-events-none flex">
+<!-- Sidebar Mock -->
+<div class="w-64 bg-zinc-900 border-r border-zinc-800 h-full flex flex-col p-6 space-y-8 opacity-80">
+<div class="h-8 w-3/4 bg-white/20 rounded"></div>
+<div class="space-y-4">
+<div class="h-6 w-full bg-white/10 rounded"></div>
+<div class="h-6 w-5/6 bg-white/10 rounded"></div>
+<div class="h-6 w-full bg-white/10 rounded"></div>
+<div class="h-6 w-4/6 bg-white/10 rounded"></div>
+</div>
+</div>
+<!-- Main Content Mock -->
+<div class="flex-1 p-8 space-y-6 opacity-80 bg-sovereign-blue/20">
+<!-- KPI Row -->
+<div class="grid grid-cols-4 gap-6">
+<div class="bg-zinc-800 h-32 rounded-lg border border-zinc-700"></div>
+<div class="bg-zinc-800 h-32 rounded-lg border border-zinc-700"></div>
+<div class="bg-zinc-800 h-32 rounded-lg border border-zinc-700"></div>
+<div class="bg-zinc-800 h-32 rounded-lg border border-zinc-700"></div>
+</div>
+<!-- Table Mock -->
+<div class="bg-zinc-800 flex-1 rounded-lg border border-zinc-700 p-6 flex flex-col space-y-4 h-[600px]">
+<div class="h-8 w-1/4 bg-white/20 rounded mb-4"></div>
+<div class="h-10 w-full bg-white/5 rounded"></div>
+<div class="h-10 w-full bg-white/5 rounded"></div>
+<div class="h-10 w-full bg-white/5 rounded"></div>
+<div class="h-10 w-full bg-white/5 rounded"></div>
+<div class="h-10 w-full bg-white/5 rounded"></div>
+<div class="h-10 w-full bg-white/5 rounded"></div>
+</div>
+</div>
+</div>
+<!-- Centerpiece -->
+<div class="relative z-10 flex items-center justify-center max-w-7xl mx-auto w-full px-8 gap-16">
+<!-- Phone Frame -->
+<div class="relative w-[375px] h-[812px] bg-white rounded-[40px] border-[12px] border-surface-container-high phone-frame overflow-hidden flex flex-col flex-shrink-0">
+<!-- Phone Notch -->
+<div class="absolute top-0 inset-x-0 h-6 bg-surface-container-high rounded-b-3xl w-40 mx-auto z-20"></div>
+<!-- Customer App Content -->
+<div class="flex-1 flex flex-col bg-surface overflow-y-auto pt-10">
+<!-- App Header -->
+<header class="px-6 pb-6 border-b border-outline-variant flex flex-col items-center justify-center bg-surface-container-lowest">
+<h1 class="font-headline-md text-headline-md text-primary mt-4 text-center">Partner Resolution Portal</h1>
+<div class="mt-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full flex items-center gap-1 border border-outline-muted">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span class="font-label-caps text-[10px] uppercase tracking-wider">Powered by VeriServe</span>
+</div>
+</header>
+<!-- Status Canvas -->
+<main class="flex-1 p-6 flex flex-col">
+<div class="text-center mb-8">
+<div class="w-16 h-16 bg-surface-container rounded-full mx-auto flex items-center justify-center mb-4 relative">
+<span class="material-symbols-outlined text-primary text-[32px] animate-pulse">radar</span>
+<div class="absolute inset-0 border-2 border-primary rounded-full animate-ping opacity-20"></div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Analyzing Claim Veracity</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Please wait while we securely process your submitted evidence.</p>
+</div>
+<!-- Processing Checklist -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex-1">
+<ul class="space-y-6">
+<!-- Item 1: Complete -->
+<li class="flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-[#10b981] flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Fetching Rider PoD</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Cross-referencing delivery logs and timestamped location data.</p>
+</div>
+</li>
+<!-- Item 2: Complete -->
+<li class="flex items-start gap-4 relative before:absolute before:left-3 before:-top-5 before:h-4 before:w-px before:bg-outline-variant">
+<div class="w-6 h-6 rounded-full bg-[#10b981] flex items-center justify-center flex-shrink-0 mt-0.5 relative z-10">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Initializing Vision Delta Analysis</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Comparing user photo against delivery point-of-drop baseline.</p>
+</div>
+</li>
+<!-- Item 3: In Progress -->
+<li class="flex items-start gap-4 relative before:absolute before:left-3 before:-top-5 before:h-4 before:w-px before:bg-outline-variant">
+<div class="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin flex items-center justify-center flex-shrink-0 mt-0.5 relative z-10 bg-surface-container-lowest">
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-wider">Running Fraud Heuristics</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Applying ML models to detect EXIF tampering and metadata inconsistencies.</p>
+</div>
+</li>
+<!-- Item 4: Pending -->
+<li class="flex items-start gap-4 opacity-50 relative before:absolute before:left-3 before:-top-5 before:h-4 before:w-px before:bg-outline-variant">
+<div class="w-6 h-6 rounded-full border border-outline-variant flex items-center justify-center flex-shrink-0 mt-0.5 relative z-10 bg-surface-container-lowest">
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Generating Verdict</h3>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-1">Awaiting final confidence score from Veracity Engine.</p>
+</div>
+</li>
+</ul>
+</div>
+</main>
+<!-- App Footer -->
+<footer class="p-6 text-center border-t border-outline-variant bg-surface-container-lowest">
+<p class="font-mono-log text-[10px] text-outline tracking-tight">Verified by VeriServe Veracity Engine</p>
+<p class="font-mono-log text-[9px] text-outline opacity-70 mt-1">powered by Ilmu-GLM-5.1</p>
+</footer>
+</div>
+<!-- Phone Home Indicator -->
+<div class="absolute bottom-2 inset-x-0 h-1 bg-outline-variant rounded-full w-32 mx-auto z-20"></div>
+</div>
+<!-- Functional Toggle Action -->
+<div class="flex-shrink-0">
+<button class="bg-primary text-on-primary border border-outline-muted rounded-xl px-8 py-5 flex items-center gap-4 hover:bg-surface-tint transition-all shadow-lg group">
+<div class="w-10 h-10 bg-surface-container/20 rounded border border-outline-variant/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">admin_panel_settings</span>
+</div>
+<div class="text-left">
+<span class="block font-label-caps text-label-caps uppercase tracking-widest text-on-primary/80">Developer Tools</span>
+<span class="block font-headline-md text-[18px] font-semibold mt-1">Switch to Veracity Engine <span class="text-secondary-fixed opacity-80">(God Mode)</span></span>
+</div>
+<span class="material-symbols-outlined ml-4 text-on-primary/50 group-hover:text-on-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

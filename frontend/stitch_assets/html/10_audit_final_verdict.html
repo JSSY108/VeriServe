@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Veracity-as-a-Service - Investigation Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#dde3eb",
+                        "outline-variant": "#c5c6cd",
+                        "surface-bright": "#fbf9fb",
+                        "secondary-fixed-dim": "#b8c8da",
+                        "on-surface": "#1b1b1d",
+                        "on-background": "#1b1b1d",
+                        "background": "#fbf9fb",
+                        "on-secondary-fixed-variant": "#394857",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#efedef",
+                        "on-tertiary-fixed": "#161c22",
+                        "surface-variant": "#e4e2e4",
+                        "primary-container": "#0d1c32",
+                        "surface": "#fbf9fb",
+                        "surface-tint": "#515f78",
+                        "primary": "#002D62", /* Sovereign Blue */
+                        "on-primary-container": "#76849f",
+                        "tertiary-container": "#161c22",
+                        "on-surface-variant": "#44474d",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#eae7ea",
+                        "inverse-on-surface": "#f2f0f2",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "secondary-container": "#d1e1f4",
+                        "inverse-primary": "#b9c7e4",
+                        "on-secondary-container": "#556474",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "on-tertiary-container": "#7e848c",
+                        "on-primary-fixed": "#0d1c32",
+                        "on-primary-fixed-variant": "#39475f",
+                        "tertiary": "#000000",
+                        "secondary-fixed": "#d4e4f6",
+                        "outline": "#75777e",
+                        "secondary": "#50606f", /* Slate Gray */
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "inverse-surface": "#303032",
+                        "surface-dim": "#dbd9db",
+                        "on-secondary-fixed": "#0d1d2a",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "base-unit": "4px",
+                        "margin-page": "40px",
+                        "xs": "4px",
+                        "gutter": "20px",
+                        "xl": "32px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "mono-log": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "mono-log": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest text-on-surface font-body-sm tracking-tight docked left-0 h-full w-64 border-r border-outline-variant flex flex-col h-screen fixed left-0 top-0 pt-20 pb-8 z-30 transition-all duration-200 ease-in-out hidden md:flex">
+<!-- Sidebar content -->
+<div class="px-md pb-lg pt-4 border-b border-outline-variant mb-4">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shield</span>
+<div>
+<h2 class="text-on-surface font-headline-md tracking-tighter">Global Control</h2>
+<p class="text-on-surface-variant font-label-caps text-xs">Precision Audit Console</p>
+</div>
+</div>
+<button class="mt-lg w-full bg-primary text-on-primary py-2 rounded-lg font-label-caps flex items-center justify-center gap-2 hover:opacity-90 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> New Investigation
+        </button>
+</div>
+<div class="flex-1 px-sm overflow-y-auto">
+<a class="flex items-center gap-md px-md py-3 rounded-lg mb-1 text-on-surface font-bold border-r-4 border-primary bg-surface-container active:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined text-on-surface" data-icon="policy">policy</span>
+<span>Investigations</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg mb-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="inventory_2">inventory_2</span>
+<span>Merchants</span>
+</a>
+<a class="flex items-center gap-md px-md py-3 rounded-lg mb-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container active:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="history_edu">history_edu</span>
+<span>Audit Logs</span>
+</a>
+</div>
+<div class="px-sm pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-2 rounded-lg mb-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-transform" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-transform" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="terminal">terminal</span>
+<span>API Docs</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 min-w-0">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest text-on-surface font-body-sm antialiased font-medium docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center h-16 px-6 w-full sticky top-0 z-40 transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-lg">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface border border-outline-variant rounded-md text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 transition-colors" placeholder="Search claims..." type="text"/>
+</div>
+</div>
+<div class="text-xl font-black tracking-tighter text-on-surface md:hidden">Veracity-as-a-Service</div>
+<div class="flex items-center gap-md">
+<button class="text-primary font-label-caps hover:bg-surface-container px-3 py-1.5 rounded-md transition-colors hidden sm:block border border-outline-variant">Switch Merchant</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center ml-2 border border-outline-variant overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1W-1Qk96b2ARmYFRo9a9ZNQ9MmUJy6W28yrsYrLFDr97k9XoI3SIQHB2FXyRmq56njhAdmBuCPSfJTWrCkJRvVuV_AVEFALhRQ-f4qEdVEWpiv4PYVy-pz4w9GyeGZ0XKK6h9sGBYL2pie3n78SyKZwJe5mjaA9jjSEVAuLYUHrb03MNvaqnFxjVEv5IOiYpf7baYuZnhIHo089nihg7P7hXZ5_71NWbR5LJpF-NvUeTGMRuL2YkMdNXQ8o0sSYNT6v_RDQ6G3q8"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-margin-page mx-auto w-full max-w-7xl">
+<!-- Context Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-lg mb-xl">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-sm font-label-caps border border-outline-variant">Merchant: Shopee</span>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded-sm font-label-caps border border-outline-variant">Category: Electronics</span>
+</div>
+<h1 class="font-display-xl text-on-surface">Claim #SHP-992-ELX</h1>
+<p class="font-body-base text-on-surface-variant mt-1">Item: Monitor · Claim: Crushed Screen</p>
+</div>
+<!-- Confidence Gauge -->
+<div class="flex flex-col items-end">
+<span class="font-label-caps text-on-surface-variant mb-1">Veracity Confidence</span>
+<div class="flex items-center gap-md">
+<div class="w-32 h-2 bg-surface-variant rounded-full overflow-hidden border border-outline-variant">
+<div class="h-full bg-primary w-[98%]"></div>
+</div>
+<span class="font-headline-lg text-primary">98%</span>
+</div>
+</div>
+</div>
+<!-- Split Layout Container -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left Column -->
+<div class="lg:col-span-7 flex flex-col gap-xl">
+<!-- Ingestor Analysis Widget -->
+<div class="flex flex-col gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="bg-surface-container-low px-md py-sm border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">data_exploration</span>
+                                Ingestor Analysis
+                            </h3>
+<span class="font-label-caps text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Module: NLP-Ingest-2.4</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2">
+<!-- Left: Raw Original Complaint -->
+<div class="p-md border-r border-outline-variant bg-[#fdfaf1]">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">chat_bubble</span>
+<span class="font-label-caps text-on-surface-variant">Original Complaint</span>
+</div>
+<blockquote class="font-body-base italic text-on-surface leading-relaxed">
+                                    "yo my shopee package SHP-992 is totally rekt, the screen is cracked and i want my money back ASAP!!"
+                                </blockquote>
+</div>
+<!-- Right: Refined Extractions -->
+<div class="p-md bg-surface-container-lowest">
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">database</span>
+<span class="font-label-caps text-on-surface-variant">Ingestor Extractions</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Intent:</span>
+<span class="font-medium bg-primary-container text-on-primary-container px-2 py-0.5 rounded-sm">[Refund] <small class="opacity-70 font-normal">High Confidence</small></span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Damage Type:</span>
+<span class="font-medium bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-sm">[Impact/Cracked Screen]</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Sentiment:</span>
+<span class="font-medium bg-error-container text-on-error-container px-2 py-0.5 rounded-sm">[Urgent / Negative]</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent Handoff Indicator -->
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-on-surface-variant animate-bounce">arrow_downward</span>
+<p class="text-on-surface-variant font-label-caps text-[10px] tracking-wider uppercase">Ingestor data passed to Investigator Agent for Vision Delta Analysis...</p>
+</div>
+</div>
+<!-- Visual Evidence -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm">
+<div class="flex items-center justify-between mb-md border-b border-outline-variant pb-sm">
+<h3 class="font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">compare</span>
+                            Visual Evidence
+                        </h3>
+<span class="font-label-caps text-on-surface-variant bg-surface-container px-2 py-1 rounded">Delta Analysis</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Rider PoD -->
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-sm">local_shipping</span> Rider PoD (T-0)</span>
+<div class="bg-surface aspect-square rounded-lg border border-outline-variant overflow-hidden relative group">
+<img alt="Rider Proof of Delivery" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyTsSwjPnnh5FBntzsdhWO2Y8Tbln_z6SoHzR2bibKGu547PO9Rw7AKeIB_ZhbBt-Wu22sgPu6rgQMjzhAxD3oahctbnXCOa4X7y43733Q1I-kUmslRjZkxliz4w6b3o1Qn3woQMktzzjM0aojgOkkcqOQHl5Ir66lJRpCr-9AKAojYMp2LNZqCxAqkefpyG-0aqKbSuOjYIZt1BH-Zh4iDUGiBzfHwO1YG0dtCN0cHrOUWepYOjKeGEpML1Zm5ElUZZFkiPbPumk"/>
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded text-on-surface font-label-caps shadow-sm">Expand</button>
+</div>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 px-2 py-0.5 border border-outline-variant rounded text-[10px] font-mono-log text-on-surface">14:22:01 SGT</div>
+</div>
+</div>
+<!-- Customer Photo -->
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant mb-2 flex items-center gap-1 text-error"><span class="material-symbols-outlined text-sm">warning</span> Customer Upload (T+1h)</span>
+<div class="bg-surface aspect-square rounded-lg border-2 border-error/50 overflow-hidden relative group">
+<img alt="Customer Photo Crushed Screen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_6ljxK_oYg8IhMUM-N8jyC_ogILYeG6jaIWw5TCHM28dsOG1ou755j8A2TM0IlHS5tbASsGFvB_togjtDpwLXZrgtPloAki7Qj_MGg-TQOtkXAhVAXyupm-P7aVnkf7doBIvu5GLFx0fgG1p4UTDYAqGChanLIMw_e4QU04QRTBQ_kaGPqUSGKxXGf_6Quu7RzBYRszFP3bxuwWQAFLbL0UAKgcYwUFNomjBSMqC07XMMYiBfwfH6XdDQWAJoOpcXTEAsDPFghzI"/>
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-surface-container-lowest border border-outline-variant px-3 py-1.5 rounded text-on-surface font-label-caps shadow-sm">Expand</button>
+</div>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/90 px-2 py-0.5 border border-outline-variant rounded text-[10px] font-mono-log text-on-surface">15:18:44 SGT</div>
+<div class="absolute top-1/4 left-1/4 w-1/2 h-1/2 border border-error bg-error/10 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Reasoning Trace Terminal -->
+<div class="lg:col-span-5 flex flex-col">
+<div class="bg-surface-container border border-outline-variant rounded-xl overflow-hidden h-full flex flex-col shadow-sm">
+<!-- Terminal Header -->
+<div class="bg-surface-container-high border-b border-outline-variant px-md py-sm flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">memory</span>
+<span class="font-label-caps text-on-surface">Ilmu-GLM-5.1 Reasoning Trace</span>
+</div>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<!-- Terminal Body -->
+<div class="p-md bg-primary-container text-on-primary-container font-mono-log flex-1 overflow-y-auto min-h-[400px]">
+<div class="space-y-sm">
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">01</span>
+<span>&gt; Initializing context block...</span>
+</div>
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">02</span>
+<span>&gt; Loading Merchant Profile: [SHOPEE_ID_882]</span>
+</div>
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">03</span>
+<span>&gt; Category Matrix: [ELECTRONICS] -&gt; Fragility Index: 0.85</span>
+</div>
+<div class="flex gap-2 border-t border-surface-tint/30 pt-2 mt-2">
+<span class="text-surface-tint opacity-70">04</span>
+<span class="text-on-primary"> [Vision] Analyzing pixel delta between PoD and Customer Upload...</span>
+</div>
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">05</span>
+<span>&gt; Structural integrity scan on bounding box: Box appears intact at PoD.</span>
+</div>
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">06</span>
+<span>&gt; Internal geometry extraction...</span>
+</div>
+<div class="flex gap-2 bg-on-primary/10 -mx-md px-md py-1 border-l-2 border-error">
+<span class="text-surface-tint opacity-70">07</span>
+<span class="text-on-primary font-bold"> [GLM] Critical damage detected on LCD panel. Risk: High.</span>
+</div>
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">08</span>
+<span>&gt; Fracture pattern consistent with blunt force post-boxing.</span>
+</div>
+<div class="flex gap-2">
+<span class="text-surface-tint opacity-70">09</span>
+<span>&gt; Synthesizing final confidence score...</span>
+</div>
+<div class="flex gap-2 pt-2 text-primary-fixed">
+<span class="text-surface-tint opacity-70">10</span>
+<span>&gt; RESULT: Claim Valid. Confidence 98.42%</span>
+</div>
+<div class="flex gap-2 animate-pulse">
+<span class="text-surface-tint opacity-70">11</span>
+<span>_</span>
+</div>
+</div>
+</div>
+<!-- Terminal Footer Actions -->
+<div class="bg-surface-container-high border-t border-outline-variant p-md flex justify-end gap-sm">
+<button class="px-4 py-2 bg-surface border border-outline-variant text-on-surface rounded font-label-caps hover:bg-surface-container transition-colors">Flag for Review</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-caps hover:opacity-90 transition-colors flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-sm">check_circle</span> Approve Claim
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Auditor Verdict Widget -->
+<div class="mt-xl">
+<div class="bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden shadow-lg">
+<div class="bg-primary text-on-primary px-md py-sm flex items-center justify-between">
+<h3 class="font-headline-md flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">gavel</span>
+                        [Auditor Agent] Final Policy Review
+                    </h3>
+<span class="font-label-caps bg-on-primary/20 px-2 py-1 rounded">Policy v4.2-Secure</span>
+</div>
+<div class="p-lg flex flex-col gap-lg">
+<!-- Top Section: Compliance and Verdict -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<!-- Compliance Checks -->
+<div class="bg-surface-container-low p-md rounded-lg border border-outline-variant">
+<h4 class="font-label-caps text-on-surface-variant border-b border-outline-variant pb-2 mb-md">Compliance Checklist</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-green-600 font-bold bg-green-100 rounded-full p-0.5 text-lg" style="font-variation-settings: 'wght' 700;">check</span>
+<div>
+<p class="text-body-sm font-medium text-on-surface">Claim Value Validation</p>
+<p class="text-xs text-on-surface-variant">RM 42.00 is below the RM 50.00 automated limit.</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-green-600 font-bold bg-green-100 rounded-full p-0.5 text-lg" style="font-variation-settings: 'wght' 700;">check</span>
+<div>
+<p class="text-body-sm font-medium text-on-surface">Evidence Strength Analysis</p>
+<p class="text-xs text-on-surface-variant">98.4% visual match exceeds the 95% certainty threshold.</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<span class="material-symbols-outlined text-green-600 font-bold bg-green-100 rounded-full p-0.5 text-lg" style="font-variation-settings: 'wght' 700;">check</span>
+<div>
+<p class="text-body-sm font-medium text-on-surface">Merchant Status Verification</p>
+<p class="text-xs text-on-surface-variant">Merchant account is active and in good standing.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Verdict Box -->
+<div class="flex flex-col justify-center">
+<div class="border-4 border-primary p-lg rounded-xl bg-primary/5 flex flex-col items-center text-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl mb-2">verified_user</span>
+<h4 class="text-primary font-black text-xl tracking-tight uppercase">Verdict: Autonomous Approval</h4>
+<div class="h-px w-24 bg-primary/30 my-3"></div>
+<p class="text-on-surface font-body-sm leading-relaxed max-w-xs">
+                                    Final findings satisfy all Merchant-defined risk parameters and regional policy constraints.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Flow Visualizer & CTA -->
+<div class="flex flex-col items-center justify-center pt-4 pb-2 border-t border-outline-variant mt-4">
+<div class="flex flex-col items-center mb-6">
+<div class="h-10 w-0.5 bg-primary/30 relative">
+<span class="material-symbols-outlined text-primary absolute -bottom-4 -left-[15px] text-3xl">arrow_drop_down</span>
+</div>
+</div>
+<button class="w-full max-w-md py-4 bg-primary text-on-primary rounded-xl font-bold flex flex-col items-center justify-center gap-1 hover:opacity-95 transition-all shadow-xl active:scale-[0.98] group">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">account_balance_wallet</span>
+<span class="text-lg">Execute Payment API</span>
+</div>
+<span class="text-[10px] font-normal opacity-70 uppercase tracking-widest">Instant Disbursement via Veracity-Net</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
