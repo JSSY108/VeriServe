@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter --version)",
+      "Bash(flutter analyze *)",
+      "Bash(where flutter *)",
+      "Bash(cmd.exe *)",
+      "Bash(C:/src/flutter/bin/flutter *)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "postgres",
+    "github",
+    "fetch"
+  ]
+}
